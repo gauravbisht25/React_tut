@@ -5,22 +5,14 @@ import './App.css';
 class App extends Component{
   state = {
   persons:[
-    { name: 'Max' , age: 28 },
-    { name: 'Manu' ,  age: 25 },
-    { name: 'Stephanie' , age: 29 }
+    { id:'ab',name:  'Max' , age: 28 },
+    { id:'bc', name: 'Manu' ,  age: 25 },
+    { id:'cd',name: 'Stephanie' , age: 29 }
      ],
      showPersons: false
   }
       
-      switchHandler = (newName)=>{
-        this.setState({
-          persons:[
-            { name: newName, age: 28 },
-            { name: 'Manu', age: 25 },
-            { name: 'Stephanie', age: 27 }
-          ]
-        })
-      }
+    
 
         nameChangeHandler = (event)=>{
           this.setState({
@@ -32,6 +24,11 @@ class App extends Component{
           })
         }
 
+            deleteHandler = (personIndex)=>{
+              const persons = [...this.state.persons];
+              persons.splice(personIndex , 1);
+              this.setState({persons: persons})
+            }
 
       togglePerson=()=>{
       const doesShow = this.state.showPersons;
@@ -39,14 +36,13 @@ class App extends Component{
       };
 
 
-     
   render (){
 
     const style={
-       backgroundColor: 'black',
+       backgroundColor: 'green',
        color:'white',
-       borderRadius: '10px',
-       border: '1px solid blue',
+       borderRadius: '4px',
+       border: '1px solid green',
        padding: '8px'
     };
     
@@ -55,20 +51,32 @@ class App extends Component{
     if (this.state.showPersons) {
       persons = (
         <div>
-        {this.state.persons.map(person =>{
+        {this.state.persons.map((person , index) =>{
           return <Person 
+           click ={()=>this.deleteHandler(index)}
             name ={person.name}
+            key ={person.id}
             age= {person.age} />
         })}
           
         </div>
       );
+      style.backgroundColor = 'red';
+    }
+
+    const classes = [];
+    if(this.state.persons.length <= 2){
+      classes.push('red');
+    }
+
+    if(this.state.persons.length<= 1){
+      classes.push('bold');
     }
 
     return (
       <div className = "App">
       <h1>Hi , I m React App</h1>
-      <p>This is really working</p>
+      <p className ={classes.join(' ')} >This is really working</p>
       <button 
       style={style}
       onClick={this.togglePerson}>Toggle Persons</button>

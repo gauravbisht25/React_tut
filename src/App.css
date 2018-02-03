@@ -4,3 +4,10 @@ body{
   color:darkslategray;
   background-color: palevioletred;
 }
+
+.red{
+  color: red;
+}
+.bold{
+  font-weight: bold;
+}
