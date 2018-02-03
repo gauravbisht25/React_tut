@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import Raduim from 'radium';
 import Person from './Person/Person';
 import './App.css';
 
@@ -43,7 +44,11 @@ class App extends Component{
        color:'white',
        borderRadius: '4px',
        border: '1px solid green',
-       padding: '8px'
+       padding: '8px',
+       ':hover': {
+         backgroundColor: 'lightgreen',
+         color: 'black'
+       }
     };
     
 
@@ -62,6 +67,11 @@ class App extends Component{
         </div>
       );
       style.backgroundColor = 'red';
+
+      style[':hover'] = {
+        backgroundColor: 'lightred',
+        color: 'black'
+      }
     }
 
     const classes = [];
